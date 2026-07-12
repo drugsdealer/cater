@@ -7,6 +7,8 @@
  *
  * Токен живёт только на сервере и в браузер не попадает.
  */
+declare const process: { env: Record<string, string | undefined> }
+
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
