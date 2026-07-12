@@ -42,11 +42,19 @@ function FleetCard({ boat, index }: { boat: (typeof fleet)[number]; index: numbe
       style={{ transitionDelay: `${(index % 2) * 90}ms` }}
     >
       <div className="card__media">
-        <span className="card__placeholder" aria-hidden="true">⛴️</span>
+        {boat.fit === 'contain' && (
+          <div
+            className="card__media-fill"
+            style={{ backgroundImage: `url("${boat.image}")` }}
+            aria-hidden="true"
+          />
+        )}
         <img
+          className="card__img"
           src={boat.image}
           alt={boat.name}
           loading="lazy"
+          style={{ objectFit: boat.fit ?? 'cover' }}
           onError={(e) => {
             e.currentTarget.style.visibility = 'hidden'
           }}

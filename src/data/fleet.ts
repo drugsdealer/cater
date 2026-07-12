@@ -4,6 +4,8 @@ export interface Boat {
   type: string
   /** Ссылка на фото катера (CDN ImageKit). */
   image: string
+  /** Как вписывать фото: 'cover' (по умолчанию) или 'contain' — показать целиком. */
+  fit?: 'cover' | 'contain'
   motor: string
   capacity: string
   /** Требуются ли права ГИМС для управления. */
@@ -18,6 +20,7 @@ export const fleet: Boat[] = [
     name: 'Bayliner 1851 Capri',
     type: 'Катер',
     image: 'https://ik.imagekit.io/qowmy92ny/2026-07-12%2016.03.43.jpg',
+    fit: 'contain',
     motor: '4.3 л · 190 л/с',
     capacity: 'до 5 человек',
     license: true,
@@ -42,6 +45,7 @@ export const fleet: Boat[] = [
     name: 'Bayliner 2355 Ciera',
     type: 'Катер с каютой',
     image: 'https://ik.imagekit.io/qowmy92ny/2026-07-12%2016.05.25.jpg',
+    fit: 'contain',
     motor: '5.0 л · 250 л/с',
     capacity: 'до 10 человек',
     license: true,

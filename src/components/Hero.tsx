@@ -28,13 +28,13 @@ export default function Hero() {
       </div>
 
       <div className="container hero__content">
-        <span className="hero__eyebrow reveal-up">⚓ Аренда катеров и лодок</span>
+        <span className="hero__eyebrow reveal-up">⚓ Катера и лодки · водохранилище в Подмосковье</span>
         <h1 className="hero__title reveal-up reveal-up--d1">
-          Море начинается <br /> с одного <span className="accent">решения</span>
+          Отдых на воде начинается <br /> с одного <span className="accent">решения</span>
         </h1>
         <p className="hero__lead reveal-up reveal-up--d2">
-          Подберём идеальный катер под ваш повод — от тихой рыбалки вдвоём до большой компании
-          на воде. Вы отдыхаете, мы берём на себя всё остальное.
+          Катаемся по водохранилищу в Московской области. Подберём катер под ваш повод — от тихой
+          рыбалки вдвоём до большой компании на воде. Вы отдыхаете, мы берём на себя всё остальное.
         </p>
         <div className="hero__actions reveal-up reveal-up--d3">
           <a href="#request" className="btn btn--lg">

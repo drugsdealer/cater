@@ -1,6 +1,6 @@
 /* ============================================================
    Marea — аренда яхт, катеров и лодок
-   Дизайн: морская тематика, чистый современный стиль,
+   Дизайн: водная тематика, чистый современный стиль,
    водные анимации (волны, пузырьки, покачивание, параллакс).
    ============================================================ */
 
@@ -483,25 +483,30 @@ a {
   overflow: hidden;
   background: var(--grad-sea);
 }
-.card__placeholder {
+/* Размытая подложка для фото в режиме «показать целиком» (contain) */
+.card__media-fill {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  font-size: 3rem;
-  opacity: 0.9;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(22px) brightness(0.92);
+  transform: scale(1.2);
 }
-.card__media img {
+.card__img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.7s ease;
 }
-.card:hover .card__media img {
+.card:hover .card__img {
   transform: scale(1.08);
 }
 .card__tag {
   position: absolute;
+  z-index: 2;
   top: 14px;
   left: 14px;
   padding: 6px 14px;

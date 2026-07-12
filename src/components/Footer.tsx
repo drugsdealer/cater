@@ -19,13 +19,14 @@ export default function Footer({
             </span>
             <span className="logo__text">Marea</span>
           </span>
-          <p>Аренда катеров и лодок. Ваш идеальный день на воде — в одной заявке.</p>
+          <p>Аренда катеров и лодок на водохранилище в Московской области. Ваш идеальный день на воде — в одной заявке.</p>
         </div>
 
         <div className="footer__col">
           <h4>Контакты</h4>
           <a href="tel:+79000000000">+7 (900) 000-00-00</a>
           <a href="mailto:hello@marea.ru">hello@marea.ru</a>
+          <span>Московская область, водохранилище</span>
           <span>Ежедневно, 09:00 — 21:00</span>
         </div>
 
@@ -57,7 +58,7 @@ export default function Footer({
 
       <div className="container footer__bottom">
         <span>© {new Date().getFullYear()} Marea. Все права защищены.</span>
-        <span>Сделано с любовью к морю 🌊</span>
+        <span>Сделано с любовью к воде 🌊</span>
       </div>
     </footer>
   )
