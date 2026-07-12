@@ -28,7 +28,7 @@ npm run preview  # предпросмотр собранной версии
 - **Реквизиты ИП** — объект `OPERATOR` в `src/components/LegalModal.tsx` (ФИО, ИНН, ОГРНИП, адрес, e-mail, телефон); оттуда данные подставляются в документы и футер
 - **Контакты** — телефон/e-mail в `src/components/Footer.tsx`
 - **Флот** — тексты в `src/data/fleet.ts`
-- **Фото катеров** — положите свои файлы в `public/boats/`: `bayliner-1851-capri.jpg`, `sea-ray-190-sport.jpg`, `bayliner-2355-ciera.jpg`, `prive-4.jpg`
+- **Фото катеров** — ссылки в поле `image` в `src/data/fleet.ts` (сейчас — CDN ImageKit)
 - **Отправка заявки** — в `src/components/RequestForm.tsx` (`handleSubmit`) сейчас заглушка; сюда подключается ваша CRM / e-mail / Telegram-бот
 
 ## Деплой на Vercel
