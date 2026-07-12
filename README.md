@@ -29,8 +29,27 @@ npm run preview  # предпросмотр собранной версии
 - **Контакты** — телефон/e-mail в `src/components/Footer.tsx`
 - **Флот** — тексты в `src/data/fleet.ts`
 - **Фото катеров** — ссылки в поле `image` в `src/data/fleet.ts` (сейчас — CDN ImageKit)
-- **Отправка заявки** — в `src/components/RequestForm.tsx` (`handleSubmit`) сейчас заглушка; сюда подключается ваша CRM / e-mail / Telegram-бот
+- **Отправка заявки** — форма шлёт данные в serverless-функцию `api/lead.ts`, которая отправляет заявку в Telegram (см. ниже)
 
 ## Деплой на Vercel
 
-Vercel определяет Vite автоматически: build command `npm run build`, output directory `dist`. Дополнительная настройка не требуется.
+Vercel определяет Vite автоматически: build command `npm run build`, output directory `dist`. Функции из папки `api/` подхватываются без настройки.
+
+## Заявки в Telegram
+
+Форма отправляет заявку в `api/lead.ts` (serverless-функция), а та — в Telegram. Токен бота хранится только на сервере и в браузер не попадает.
+
+Настройка:
+
+1. **Создайте бота.** В Telegram напишите [@BotFather](https://t.me/BotFather) → `/newbot` → получите **токен** вида `123456789:AAABBB...`.
+2. **Узнайте chat id.** Напишите своему боту любое сообщение, затем откройте
+   `https://api.telegram.org/bot<ТОКЕН>/getUpdates` — в ответе найдите `"chat":{"id": ...}`.
+   (Либо для личного id — бот [@userinfobot](https://t.me/userinfobot). Для группы добавьте
+   бота в группу; её id обычно отрицательный.)
+3. **Добавьте переменные в Vercel** → Project → Settings → Environment Variables:
+   - `TELEGRAM_BOT_TOKEN` — токен бота
+   - `TELEGRAM_CHAT_ID` — id чата
+4. **Сделайте Redeploy** (переменные применяются к новой сборке).
+
+> Локально через `npm run dev` эндпоинт `/api/lead` недоступен — он работает на Vercel
+> или при запуске через `vercel dev`. Пример переменных — в `.env.example`.

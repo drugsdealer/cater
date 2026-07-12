@@ -6,3 +6,6 @@ dist-ssr
 .vite
 *.tsbuildinfo
 .vercel
+.env
+.env.local
+.env.*.local

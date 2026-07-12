@@ -16,20 +16,38 @@ export default function RequestForm({
   const [type, setType] = useState(boatOptions[0])
   const [consent, setConsent] = useState(false)
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const data = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const data = new FormData(form)
     const name = String(data.get('name') || '').trim()
     const phone = String(data.get('phone') || '').trim()
+    const comment = String(data.get('comment') || '').trim()
 
     if (name.length < 2) return setError('Пожалуйста, укажите имя')
     if (phone.replace(/\D/g, '').length < 10) return setError('Проверьте номер телефона')
     if (!consent) return setError('Отметьте согласие на обработку персональных данных')
 
     setError('')
-    // Здесь была бы реальная отправка на сервер / в CRM.
-    setSent(true)
+    setLoading(true)
+    try {
+      const res = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ name, phone, type, comment }),
+      })
+      if (!res.ok) throw new Error('request_failed')
+      form.reset()
+      setConsent(false)
+      setType(boatOptions[0])
+      setSent(true)
+    } catch {
+      setError('Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -116,8 +134,8 @@ export default function RequestForm({
 
                 {error && <p className="form__error">{error}</p>}
 
-                <button type="submit" className="btn btn--lg btn--full">
-                  Отправить заявку
+                <button type="submit" className="btn btn--lg btn--full" disabled={loading}>
+                  {loading ? 'Отправляем…' : 'Отправить заявку'}
                 </button>
               </form>
             )}
