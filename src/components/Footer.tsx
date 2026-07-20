@@ -1,4 +1,4 @@
-import { OPERATOR, type LegalDoc } from './LegalModal'
+import { OPERATOR, MARINA, type LegalDoc } from './LegalModal'
 
 export default function Footer({
   onLegal,
@@ -24,10 +24,20 @@ export default function Footer({
 
         <div className="footer__col">
           <h4>Контакты</h4>
-          <a href="tel:+79000000000">+7 (900) 000-00-00</a>
-          <a href="mailto:hello@marea.ru">hello@marea.ru</a>
-          <span>Московская область, водохранилище</span>
+          <a href="tel:+79607287566">{OPERATOR.phone}</a>
+          <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a>
           <span>Ежедневно, 09:00 — 21:00</span>
+        </div>
+
+        <div className="footer__col">
+          <h4>Причал</h4>
+          <a href={MARINA.mapUrl} target="_blank" rel="noopener noreferrer">
+            {MARINA.name}
+          </a>
+          <span>{MARINA.address}</span>
+          <a href={MARINA.mapUrl} target="_blank" rel="noopener noreferrer">
+            Посмотреть на карте →
+          </a>
         </div>
 
         <div className="footer__col">

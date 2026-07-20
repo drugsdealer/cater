@@ -2,17 +2,22 @@ import { useEffect } from 'react'
 
 export type LegalDoc = 'privacy' | 'consent' | null
 
-/**
- * ⚠️ ЗАПОЛНИТЕ реквизиты Индивидуального предпринимателя.
- * Эти данные обязательны по закону (152-ФЗ, ст. 9 Закона «О защите прав потребителей»).
- */
+/** Реквизиты Индивидуального предпринимателя (152-ФЗ, ст. 9 ЗоЗПП). */
 export const OPERATOR = {
-  name: 'ИП [Фамилия Имя Отчество]',
-  inn: '[ИНН]',
-  ogrnip: '[ОГРНИП]',
-  address: '[адрес регистрации]',
-  email: '[email]',
-  phone: '[телефон]',
+  name: 'ИП Крайнова Валентина Александровна',
+  inn: '332202438461',
+  ogrnip: '322508100594650',
+  address: '141202, Московская обл., Пушкинский м.р-н, г.п. Пушкино, мкр Серебрянка, д. 25, кв. 110',
+  email: '9266188769@mail.ru',
+  phone: '+7 960 728-75-66',
+}
+
+/** Место, где происходит аренда катеров. */
+export const MARINA = {
+  name: 'Яхт-клуб «Буревестник» by Burevestnik Group',
+  address: 'Московская область, г.о. Мытищи, территория Буревестник',
+  mapUrl:
+    'https://yandex.ru/maps/org/yakht_klub_burevestnik_by_burevestnik_group/1003202085',
 }
 
 const TITLES: Record<Exclude<LegalDoc, null>, string> = {
