@@ -39,6 +39,9 @@ export default function RequestForm({
         body: JSON.stringify({ name, phone, type, comment }),
       })
       if (!res.ok) throw new Error('request_failed')
+      // Цель Яндекс.Метрики: успешная отправка заявки (идентификатор — "lead")
+      const ym = (window as unknown as { ym?: (id: number, action: string, target: string) => void }).ym
+      if (ym) ym(111196800, 'reachGoal', 'lead')
       form.reset()
       setConsent(false)
       setType(boatOptions[0])
