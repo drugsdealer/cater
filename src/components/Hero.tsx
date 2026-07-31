@@ -28,7 +28,7 @@ export default function Hero() {
       </div>
 
       <div className="container hero__content">
-        <span className="hero__eyebrow reveal-up">⚓ Катера и лодки · Яхт-клуб «Буревестник», Мытищи</span>
+        <span className="hero__eyebrow reveal-up">⚓ Аренда катеров и лодок · Яхт-клуб «Буревестник», Мытищи</span>
         <h1 className="hero__title reveal-up reveal-up--d1">
           Отдых на воде начинается <br /> с одного <span className="accent">решения</span>
         </h1>
