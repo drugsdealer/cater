@@ -8,6 +8,7 @@ import RequestForm from './components/RequestForm'
 import Footer from './components/Footer'
 import LegalModal, { type LegalDoc } from './components/LegalModal'
 import CookieBanner from './components/CookieBanner'
+import ContactFab from './components/ContactFab'
 
 export default function App() {
   const [legalDoc, setLegalDoc] = useState<LegalDoc>(null)
@@ -26,6 +27,7 @@ export default function App() {
 
       <LegalModal doc={legalDoc} onClose={() => setLegalDoc(null)} />
       <CookieBanner onOpenPrivacy={() => setLegalDoc('privacy')} />
+      <ContactFab />
     </>
   )
 }

@@ -69,7 +69,15 @@ export default function RequestForm({
               <li>✔ Ответим в течение 15 минут</li>
               <li>✔ Подберём катер под вашу компанию</li>
               <li>✔ Подскажем по правам ГИМС и условиям</li>
+              <li>✔ Работаем официально: ИП, договор аренды</li>
             </ul>
+
+            <div className="request__call">
+              <span>Не любите заполнять формы?</span>
+              <a href="tel:+79607287566" className="request__call-link">
+                📞 Позвоните: +7 960 728-75-66
+              </a>
+            </div>
           </div>
 
           <div className="request__form-wrap">
