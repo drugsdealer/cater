@@ -4,6 +4,7 @@ import Hero from './components/Hero'
 import Fleet from './components/Fleet'
 import Features from './components/Features'
 import Steps from './components/Steps'
+import Community from './components/Community'
 import RequestForm from './components/RequestForm'
 import Footer from './components/Footer'
 import LegalModal, { type LegalDoc } from './components/LegalModal'
@@ -21,6 +22,7 @@ export default function App() {
         <Fleet />
         <Features />
         <Steps />
+        <Community />
         <RequestForm onLegal={setLegalDoc} />
       </main>
       <Footer onLegal={setLegalDoc} />
