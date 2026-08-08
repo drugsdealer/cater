@@ -1585,6 +1585,15 @@ a {
   line-height: 1.45;
   box-shadow: var(--shadow-soft);
 }
+.fab__hours {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+}
 
 /* ============================================================
    Telegram-сообщество
