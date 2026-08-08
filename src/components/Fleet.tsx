@@ -121,16 +121,21 @@ function FleetCard({
             aria-hidden="true"
           />
         )}
-        <img
-          className="card__img"
-          src={current}
-          alt={boat.name}
-          loading={eager ? 'eager' : 'lazy'}
-          style={{ objectFit: boat.fit ?? 'cover' }}
-          onError={(e) => {
-            e.currentTarget.style.visibility = 'hidden'
-          }}
-        />
+        {images.map((src, i) => (
+          <img
+            key={src}
+            className={`card__img ${i === idx ? 'is-active' : ''}`}
+            src={src}
+            alt={boat.name}
+            loading={eager && i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            draggable={false}
+            style={{ objectFit: boat.fit ?? 'cover' }}
+            onError={(e) => {
+              e.currentTarget.style.visibility = 'hidden'
+            }}
+          />
+        ))}
         <span className={`card__tag ${boat.license ? 'card__tag--gims' : 'card__tag--free'}`}>
           {boat.tag}
         </span>
