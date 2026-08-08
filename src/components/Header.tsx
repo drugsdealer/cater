@@ -1,21 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { clubs } from '../data/clubs'
 
 const links = [
   { href: '#fleet', label: 'Флот' },
   { href: '#features', label: 'Почему мы' },
   { href: '#steps', label: 'Как это работает' },
-  { href: '#request', label: 'Контакты' },
 ]
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const [phonesOpen, setPhonesOpen] = useState(false)
+  const phonesRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (phonesRef.current && !phonesRef.current.contains(e.target as Node)) {
+        setPhonesOpen(false)
+      }
+    }
+    document.addEventListener('click', onClick)
+    return () => document.removeEventListener('click', onClick)
   }, [])
 
   return (
@@ -38,20 +50,44 @@ export default function Header() {
               {l.label}
             </a>
           ))}
-          <a href="tel:+79607287566" className="nav__link nav__phone" onClick={() => setOpen(false)}>
-            📞 +7 960 728-75-66
-          </a>
+
+          <div className="phones" ref={phonesRef}>
+            <button
+              type="button"
+              className="phones__toggle nav__link"
+              onClick={() => setPhonesOpen((v) => !v)}
+              aria-expanded={phonesOpen}
+            >
+              📞 Телефоны
+              <span className={`phones__caret ${phonesOpen ? 'is-open' : ''}`} aria-hidden="true">▾</span>
+            </button>
+
+            <div className={`phones__menu ${phonesOpen ? 'is-open' : ''}`}>
+              <span className="phones__label">Телефон по каждому яхт-клубу</span>
+              {clubs.map((c) => (
+                <a
+                  key={c.id}
+                  href={`tel:${c.phoneRaw}`}
+                  className="phones__item"
+                  onClick={() => {
+                    setOpen(false)
+                    setPhonesOpen(false)
+                  }}
+                >
+                  <span className="phones__club">
+                    {c.name}
+                    {c.manager ? ` · ${c.manager}` : ''}
+                  </span>
+                  <span className="phones__num">{c.phone}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
           <a href="#request" className="btn btn--sm nav__cta" onClick={() => setOpen(false)}>
             Оставить заявку
           </a>
         </nav>
-
-        <a href="tel:+79607287566" className="header__phone" aria-label="Позвонить">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
-          </svg>
-          <span className="header__phone-num">+7 960 728-75-66</span>
-        </a>
 
         <button
           className={`burger ${open ? 'burger--open' : ''}`}

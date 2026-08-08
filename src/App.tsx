@@ -10,20 +10,22 @@ import Footer from './components/Footer'
 import LegalModal, { type LegalDoc } from './components/LegalModal'
 import CookieBanner from './components/CookieBanner'
 import ContactFab from './components/ContactFab'
+import type { Boat } from './data/fleet'
 
 export default function App() {
   const [legalDoc, setLegalDoc] = useState<LegalDoc>(null)
+  const [selectedBoat, setSelectedBoat] = useState<Boat | null>(null)
 
   return (
     <>
       <Header />
       <main>
         <Hero />
-        <Fleet />
+        <Fleet onSelect={setSelectedBoat} />
         <Features />
         <Steps />
         <Community />
-        <RequestForm onLegal={setLegalDoc} />
+        <RequestForm onLegal={setLegalDoc} selected={selectedBoat} />
       </main>
       <Footer onLegal={setLegalDoc} />
 

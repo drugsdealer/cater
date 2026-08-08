@@ -25,6 +25,7 @@ export default async function handler(req: any, res: any) {
   const name = String(body.name ?? '').trim()
   const phone = String(body.phone ?? '').trim()
   const type = String(body.type ?? '').trim()
+  const club = String(body.club ?? '').trim()
   const comment = String(body.comment ?? '').trim()
 
   // Базовая валидация — та же, что и на клиенте.
@@ -39,6 +40,7 @@ export default async function handler(req: any, res: any) {
     `📞 <b>Телефон:</b> ${esc(phone)}`,
   ]
   if (type) lines.push(`⚓ <b>Катер:</b> ${esc(type)}`)
+  if (club) lines.push(`📍 <b>Яхт-клуб:</b> ${esc(club)}`)
   if (comment) lines.push(`💬 <b>Комментарий:</b> ${esc(comment)}`)
 
   try {

@@ -501,6 +501,106 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 28px;
 }
+
+/* ---------- Группировка флота по яхт-клубам ---------- */
+.clubgroup {
+  margin-bottom: 56px;
+}
+.clubgroup:last-of-type {
+  margin-bottom: 0;
+}
+.clubgroup__head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+  padding: 22px 26px;
+  margin-bottom: 30px;
+  background: var(--grad-deep);
+  color: var(--white);
+  border-radius: var(--radius);
+}
+.clubgroup__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+.clubgroup__badge svg {
+  width: 16px;
+  height: 16px;
+}
+.clubgroup__main {
+  flex: 1;
+  min-width: 200px;
+}
+.clubgroup__name {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  line-height: 1.15;
+}
+.clubgroup__addr {
+  margin-top: 3px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+.clubgroup__contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.clubgroup__link,
+.clubgroup__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.clubgroup__link svg,
+.clubgroup__phone svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+.clubgroup__link {
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--white);
+}
+.clubgroup__link:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+.clubgroup__phone {
+  background: var(--grad-sea);
+  color: var(--white);
+  box-shadow: 0 8px 18px -8px rgba(14, 165, 183, 0.7);
+}
+.clubgroup__phone:hover {
+  transform: translateY(-2px);
+}
+.clubgroup__hint {
+  width: 100%;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.82);
+}
+.clubgroup__hint b {
+  color: var(--sky);
+}
+.clubgroup__extras {
+  width: 100%;
+  margin-top: 4px;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.82);
+}
 .card {
   background: var(--white);
   border-radius: var(--radius);
@@ -1161,6 +1261,236 @@ a {
 .request__call-link:hover {
   color: var(--sky);
 }
+.request__call-club {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ---------- Выпадающий список телефонов яхт-клубов ---------- */
+.phones {
+  position: relative;
+}
+.phones__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+.phones__caret {
+  font-size: 0.7em;
+  transition: transform 0.25s ease;
+}
+.phones__caret.is-open {
+  transform: rotate(180deg);
+}
+.phones__menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  right: 0;
+  min-width: 310px;
+  padding: 8px;
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  display: none;
+  z-index: 60;
+  animation: fade-in 0.2s ease;
+}
+.phones__menu.is-open {
+  display: block;
+}
+.phones__label {
+  display: block;
+  padding: 8px 12px 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.phones__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+.phones__item:hover {
+  background: var(--foam);
+}
+.phones__club {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.phones__num {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+/* ---------- Локации яхт-клубов в hero ---------- */
+.hero__locations {
+  margin-top: 42px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.hero__locations-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.hero__locations-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.hero__loc {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(6px);
+  color: var(--white);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.hero__loc svg {
+  width: 16px;
+  height: 16px;
+}
+.hero__loc:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-2px);
+}
+
+/* ---------- Карусель фото в карточке ---------- */
+.card__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  backdrop-filter: blur(4px);
+  transition: opacity 0.25s ease, background 0.2s ease;
+}
+.card__nav svg {
+  width: 18px;
+  height: 18px;
+}
+.card__nav--prev {
+  left: 10px;
+}
+.card__nav--next {
+  right: 10px;
+}
+.card:hover .card__nav {
+  opacity: 1;
+}
+.card__nav:hover {
+  background: var(--white);
+}
+.card__dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+}
+.card__dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.6);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.card__dot.is-active {
+  background: var(--white);
+  transform: scale(1.3);
+}
+
+/* ---------- Расположение и цена в карточке ---------- */
+.card__location {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sea);
+}
+.card__location svg {
+  width: 15px;
+  height: 15px;
+}
+.card__price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 4px 0 16px;
+}
+.card__price b {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--ink);
+}
+.card__price span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ---------- Баннер выбранного катера в форме ---------- */
+.request__selected {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: rgba(14, 165, 183, 0.1);
+  border: 1px solid rgba(14, 165, 183, 0.25);
+}
+.request__selected-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.request__selected b {
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.request__selected-club {
+  width: 100%;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--sea);
+}
 
 /* ============================================================
    Плавающая кнопка связи (FAB)
@@ -1227,6 +1557,33 @@ a {
   opacity: 1;
   transform: none;
   pointer-events: auto;
+}
+.fab__bar {
+  order: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.fab__label {
+  padding: 10px 15px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow-soft);
+  animation: modal-in 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.fab__note {
+  max-width: 270px;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  box-shadow: var(--shadow-soft);
 }
 
 /* ============================================================
@@ -1367,6 +1724,44 @@ a {
   }
   .header__phone-num {
     display: none;
+  }
+  /* Телефоны — разворачиваются списком прямо в мобильном меню */
+  .phones {
+    width: 100%;
+    border-bottom: 1px solid rgba(6, 42, 74, 0.08);
+    padding-bottom: 8px;
+  }
+  .phones__toggle {
+    display: none;
+  }
+  .phones__menu {
+    position: static;
+    display: block;
+    min-width: 0;
+    padding: 8px 0 0;
+    box-shadow: none;
+    animation: none;
+  }
+  .phones__item {
+    padding: 10px 0;
+  }
+  .phones__item:hover {
+    background: transparent;
+  }
+  /* Стрелки карусели видны без наведения (тач) */
+  .card__nav {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .hero__locations {
+    margin-top: 30px;
+  }
+  .clubgroup__head {
+    padding: 18px 18px;
+    gap: 14px;
+  }
+  .clubgroup__contacts {
+    width: 100%;
   }
   .nav {
     position: fixed;

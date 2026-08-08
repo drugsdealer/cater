@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Waves from './Waves'
+import { clubs } from '../data/clubs'
 
 export default function Hero() {
   const [offset, setOffset] = useState(0)
@@ -28,13 +29,13 @@ export default function Hero() {
       </div>
 
       <div className="container hero__content">
-        <span className="hero__eyebrow reveal-up">⚓ Аренда катеров и лодок · Яхт-клуб «Буревестник», Мытищи</span>
+        <span className="hero__eyebrow reveal-up">⚓ Аренда катеров и лодок · Москва и Подмосковье</span>
         <h1 className="hero__title reveal-up reveal-up--d1">
           Отдых на воде начинается <br /> с одного <span className="accent">решения</span>
         </h1>
         <p className="hero__lead reveal-up reveal-up--d2">
-          Наша база — Яхт-клуб «Буревестник» в Мытищах, на водохранилище в Подмосковье. Подберём
-          катер под ваш повод — от тихой рыбалки вдвоём до большой компании на воде.
+          Наши катера и яхты — в яхт-клубах Москвы и Подмосковья. Подберём судно под ваш повод —
+          от тихой рыбалки вдвоём до большой компании на воде.
         </p>
         <div className="hero__actions reveal-up reveal-up--d3">
           <a href="#request" className="btn btn--lg">
@@ -45,18 +46,24 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="hero__stats reveal-up reveal-up--d4">
-          <div className="stat">
-            <span className="stat__num">4</span>
-            <span className="stat__label">катера в аренду</span>
-          </div>
-          <div className="stat">
-            <span className="stat__num">до 10</span>
-            <span className="stat__label">гостей на борту</span>
-          </div>
-          <div className="stat">
-            <span className="stat__num">24/7</span>
-            <span className="stat__label">на связи</span>
+        <div className="hero__locations reveal-up reveal-up--d4">
+          <span className="hero__locations-label">📍 Наши локации:</span>
+          <div className="hero__locations-list">
+            {clubs.map((c) => (
+              <a
+                key={c.id}
+                href={c.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hero__loc"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                {c.name}
+              </a>
+            ))}
           </div>
         </div>
       </div>

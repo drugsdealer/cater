@@ -1,15 +1,18 @@
-import { useState, type FormEvent } from 'react'
+import { useState, useEffect, type FormEvent } from 'react'
 import Waves from './Waves'
 import { useReveal } from '../hooks/useReveal'
-import { fleet } from '../data/fleet'
+import { fleet, type Boat } from '../data/fleet'
+import { clubs, getClub } from '../data/clubs'
 import type { LegalDoc } from './LegalModal'
 
 const boatOptions = [...fleet.map((b) => b.name), 'Ещё не решил(а)']
 
 export default function RequestForm({
   onLegal,
+  selected,
 }: {
   onLegal: (doc: LegalDoc) => void
+  selected: Boat | null
 }) {
   const { ref, visible } = useReveal(0.1)
   const [sent, setSent] = useState(false)
@@ -17,6 +20,21 @@ export default function RequestForm({
   const [consent, setConsent] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+
+  // Пользователь нажал «заявка на этот катер» — подставляем катер в форму.
+  useEffect(() => {
+    if (selected) {
+      setType(selected.name)
+      setSent(false)
+    }
+  }, [selected])
+
+  const chosenBoat = fleet.find((b) => b.name === type)
+  const chosenClubObj = getClub(chosenBoat?.clubId)
+  const chosenClub = chosenClubObj ? `${chosenClubObj.name}, ${chosenClubObj.address}` : ''
+  const selectedClub = getClub(selected?.clubId)
+  // Телефон в блоке «позвонить» — клуба выбранной яхты (иначе основной клуб).
+  const callClub = chosenClubObj ?? clubs[0]
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -36,7 +54,7 @@ export default function RequestForm({
       const res = await fetch('/api/lead', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ name, phone, type, comment }),
+        body: JSON.stringify({ name, phone, type, club: chosenClub, comment }),
       })
       if (!res.ok) throw new Error('request_failed')
       // Цель Яндекс.Метрики: успешная отправка заявки (идентификатор — "lead")
@@ -62,8 +80,8 @@ export default function RequestForm({
             <span className="section__eyebrow section__eyebrow--light">Заявка</span>
             <h2 className="request__title">Оставьте заявку — остальное сделаем мы</h2>
             <p className="request__text">
-              Никаких обязательств и предоплат. Заполните форму, и менеджер свяжется с вами,
-              чтобы подобрать катер и рассчитать индивидуальное предложение.
+              Выберите катер — и менеджер нужного яхт-клуба свяжется с вами, подберёт судно и
+              рассчитает индивидуальное предложение. Никаких обязательств и предоплат.
             </p>
             <ul className="request__list">
               <li>✔ Ответим в течение 15 минут</li>
@@ -74,9 +92,14 @@ export default function RequestForm({
 
             <div className="request__call">
               <span>Не любите заполнять формы?</span>
-              <a href="tel:+79607287566" className="request__call-link">
-                📞 Позвоните: +7 960 728-75-66
+              <a href={`tel:${callClub.phoneRaw}`} className="request__call-link">
+                📞 Позвоните: {callClub.phone}
+                {callClub.manager ? ` · ${callClub.manager}` : ''}
               </a>
+              <span className="request__call-club">
+                {callClub.name}
+                {callClub.sayMarea ? ' · скажите, что вы от Marea (Мареа)' : ''}
+              </span>
             </div>
           </div>
 
@@ -92,6 +115,16 @@ export default function RequestForm({
               </div>
             ) : (
               <form className="form" onSubmit={handleSubmit} noValidate>
+                {selected && (
+                  <div className="request__selected">
+                    <span className="request__selected-label">Заявка на катер</span>
+                    <b>{selected.name}</b>
+                    {selectedClub && (
+                      <span className="request__selected-club">📍 {selectedClub.name}, {selectedClub.address}</span>
+                    )}
+                  </div>
+                )}
+
                 <div className="field">
                   <label htmlFor="name">Как к вам обращаться</label>
                   <input id="name" name="name" type="text" placeholder="Ваше имя" autoComplete="name" />
