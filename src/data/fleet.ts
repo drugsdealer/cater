@@ -1,7 +1,19 @@
+export interface BoatColor {
+  id: string
+  /** Подпись цвета, напр. «Красный». */
+  label: string
+  /** Цвет кружочка-образца (hex). */
+  swatch: string
+  /** Фото этого цвета (первое — главное). */
+  images: string[]
+}
+
 export interface Boat {
   id: string
   name: string
   type: string
+  /** Цветовые варианты (переключатель на карточке). Если заданы — заменяют галерею. */
+  colors?: BoatColor[]
   /** Одно фото (используется, если не задан images). Файлы — в public/boats. */
   image: string
   /** Несколько фото для листания (карусель). Первое — главное. */
@@ -135,12 +147,42 @@ export const fleet: Boat[] = [
     name: 'Prive 4.0',
     type: 'Лодка',
     image: '/boats/prive-4-1.jpg',
-    images: [
-      '/boats/prive-4-1.jpg',
-      '/boats/prive-4-2.jpg',
-      '/boats/prive-4-3.jpg',
-      '/boats/prive-4-4.jpg',
-      '/boats/prive-4-5.jpg',
+    colors: [
+      {
+        id: 'graphite',
+        label: 'Графит',
+        swatch: '#3c4149',
+        images: [
+          '/boats/prive-4-1.jpg',
+          '/boats/prive-4-2.jpg',
+          '/boats/prive-4-3.jpg',
+          '/boats/prive-4-4.jpg',
+          '/boats/prive-4-5.jpg',
+        ],
+      },
+      {
+        id: 'red',
+        label: 'Красный',
+        swatch: '#c02535',
+        images: ['/boats/prive-red-1.jpg', '/boats/prive-red-2.jpg', '/boats/prive-red-3.jpg'],
+      },
+      {
+        id: 'yellow',
+        label: 'Жёлтый',
+        swatch: '#f2c200',
+        images: ['/boats/prive-yellow-1.jpg', '/boats/prive-yellow-2.jpg', '/boats/prive-yellow-3.jpg'],
+      },
+      {
+        id: 'grey',
+        label: 'Серый',
+        swatch: '#8b9198',
+        images: [
+          '/boats/prive-grey-1.jpg',
+          '/boats/prive-grey-2.jpg',
+          '/boats/prive-grey-3.jpg',
+          '/boats/prive-grey-4.jpg',
+        ],
+      },
     ],
     fit: 'contain',
     capacity: 'до 3 человек',

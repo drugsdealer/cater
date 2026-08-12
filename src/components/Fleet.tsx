@@ -100,12 +100,23 @@ function FleetCard({
   eager?: boolean
 }) {
   const { ref, visible } = useReveal(0.1)
-  const images = boat.images && boat.images.length > 0 ? boat.images : [boat.image]
+  const colors = boat.colors
+  const [colorIdx, setColorIdx] = useState(0)
+  const images =
+    colors && colors.length > 0
+      ? colors[colorIdx].images
+      : boat.images && boat.images.length > 0
+        ? boat.images
+        : [boat.image]
   const [slide, setSlide] = useState(0)
   const many = images.length > 1
   const idx = Math.min(slide, images.length - 1)
   const current = images[idx]
   const go = (dir: number) => setSlide((s) => (s + dir + images.length) % images.length)
+  const pickColor = (i: number) => {
+    setColorIdx(i)
+    setSlide(0)
+  }
 
   return (
     <article
@@ -180,6 +191,28 @@ function FleetCard({
       <div className="card__body">
         <span className="card__type">{boat.type}</span>
         <h3 className="card__name">{boat.name}</h3>
+        {colors && colors.length > 0 && (
+          <div className="card__colors">
+            <span className="card__colors-label">
+              Цвет: <b>{colors[colorIdx].label}</b>
+              {colors.length > 1 && <em> · есть и другие цвета</em>}
+            </span>
+            <div className="card__swatches">
+              {colors.map((c, ci) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  className={`card__swatch ${ci === colorIdx ? 'is-active' : ''}`}
+                  style={{ background: c.swatch }}
+                  onClick={() => pickColor(ci)}
+                  aria-label={c.label}
+                  aria-pressed={ci === colorIdx}
+                  title={c.label}
+                />
+              ))}
+            </div>
+          </div>
+        )}
         <p className="card__desc">{boat.description}</p>
         <div className="card__meta">
           {boat.motor && <span>⚙️ {boat.motor}</span>}

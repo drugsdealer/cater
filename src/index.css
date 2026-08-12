@@ -1470,6 +1470,48 @@ a {
   color: var(--muted);
 }
 
+/* ---------- Переключатель цвета катера ---------- */
+.card__colors {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 2px 0 12px;
+}
+.card__colors-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.card__colors-label b {
+  color: var(--ink);
+}
+.card__colors-label em {
+  font-style: normal;
+  color: var(--sea);
+  font-weight: 600;
+}
+.card__swatches {
+  display: flex;
+  gap: 8px;
+}
+.card__swatch {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(6, 42, 74, 0.2);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.card__swatch:hover {
+  transform: scale(1.15);
+}
+.card__swatch.is-active {
+  box-shadow: 0 0 0 2px var(--sea);
+  transform: scale(1.15);
+}
+
 /* ---------- Баннер выбранного катера в форме ---------- */
 .request__selected {
   display: flex;
